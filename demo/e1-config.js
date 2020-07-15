@@ -139,12 +139,20 @@ dynamicCore = (compile) => ({
   },
 });
 
-const holder = (text, almondtree, compile, config) => {
+const holder = (
+  text,
+  core,
+  almondtree,
+  compile,
+  config
+) => {
   const ast = almondtree(`(let ${text})`, config);
 
   const main = compile(ast, config);
 
-  return `const main = ${main};
+  return `${core}
+
+const main = ${main};
 
 if (!['undefined', 'function'].includes(typeof main)) {
   console.log(main);
@@ -157,7 +165,7 @@ module.exports = {
   holder,
   fileExtension: 'e1',
   languages: ['js'],
-  coreFolder: './core',
+  corePath: __dirname + '/core',
   inputFolder: './buildSrc',
   outputFolder: './build',
 };
