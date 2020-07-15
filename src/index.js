@@ -3,7 +3,10 @@ const almondtree = require('almondtree');
 const R = require('ramda');
 const fs = require('fs');
 
-module.exports = (text, lang, config) => {
+module.exports.getConfigPath = require('./getConfigPath');
+module.exports.build = require('./build');
+
+module.exports.picompiler = (text, lang, config) => {
   const files = fs.readdirSync(
     config.corePath + '/' + lang
   );

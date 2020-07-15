@@ -1,5 +1,4 @@
-const almondtree = require('almondtree');
-const applyHolder = require('../applyHolder');
+const { picompiler } = require('../index');
 const config = require('../../example/picompiler.config.js');
 
 test('number', () => {
@@ -16,7 +15,7 @@ if (!['undefined', 'function'].includes(typeof main)) {
   console.log(main);
 }`;
 
-  expect(applyHolder(text, 'js', config)).toEqual(output);
+  expect(picompiler(text, 'js', config)).toEqual(output);
 });
 
 test('add and subtract', () => {
@@ -33,7 +32,7 @@ if (!['undefined', 'function'].includes(typeof main)) {
   console.log(main);
 }`;
 
-  expect(applyHolder(text, 'js', config)).toEqual(output);
+  expect(picompiler(text, 'js', config)).toEqual(output);
 });
 
 test('let', () => {
@@ -50,5 +49,5 @@ if (!['undefined', 'function'].includes(typeof main)) {
   console.log(main);
 }`;
 
-  expect(applyHolder(text, 'js', config)).toEqual(output);
+  expect(picompiler(text, 'js', config)).toEqual(output);
 });

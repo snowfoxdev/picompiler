@@ -166,7 +166,6 @@ module.exports = {
   languages: {
     js: { dynamicCore: jsDynamicCore, holder: jsHolder },
   },
+  configName: 'e1-lang.config.js',
   corePath: __dirname + '/core',
-  srcPath: __dirname + '/src',
-  buildPath: __dirname + '/build',
 };

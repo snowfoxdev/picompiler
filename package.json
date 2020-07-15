@@ -1,10 +1,9 @@
 {
   "name": "picompiler",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "",
   "main": "./src/index.js",
   "scripts": {
-    "start": "node ./src/build.js",
     "test": "jest"
   },
   "author": "",

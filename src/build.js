@@ -4,19 +4,19 @@ const fs = require('fs');
 const watch = require('node-watch');
 const glob = require('glob');
 
-const applyHolder = require('./applyHolder');
+const { picompiler } = require('./index');
 
-module.exports = (config) => {
+module.exports = (config, buildConfig) => {
   const writeFiles = (text, filePath) => {
     R.mapObjIndexed(
       ({ dynamicFunctions, holder }, lang) => {
-        const newText = applyHolder(text, lang, config);
+        const newText = picompiler(text, lang, config);
 
         const newFilePath = R.replace(
           RegExp(
-            `^${config.srcPath}(.+)\.${config.fileExtension}`
+            `^${buildConfig.srcPath}(.+)\.${config.fileExtension}`
           ),
-          `${config.buildPath}/${lang}$1.${lang}`,
+          `${buildConfig.buildPath}/${lang}$1.${lang}`,
           filePath
         );
 
@@ -57,14 +57,14 @@ module.exports = (config) => {
     }
   };
 
-  // fs.rmdirSync(config.buildPath, { recursive: true });
+  // fs.rmdirSync(langConfig.buildPath, { recursive: true });
 
   glob(
-    config.srcPath + '/**/*.' + config.fileExtension,
+    buildConfig.srcPath + '/**/*.' + config.fileExtension,
     (er, files) => {
       R.forEach((file) => build('', file), files);
     }
   );
 
-  watch(config.srcPath, { recursive: true }, build);
+  watch(buildConfig.srcPath, { recursive: true }, build);
 };

@@ -3,12 +3,20 @@
 const R = require('ramda');
 const build = require('../src/build');
 
-const configPath = process.argv[2]
-  ? process.cwd() +
-    '/' +
-    R.replace(/^\.?\/?/, '', process.argv[2])
-  : process.cwd() + '/picompiler.config.js';
+const getConfigPath = require('../src/getConfigPath');
+
+const configPath = getConfigPath(
+  process.argv[2],
+  'picompiler.config.js'
+);
 
 const config = require(configPath);
 
-build(config);
+const buildConfigPath = getConfigPath(
+  process.argv[3],
+  config.configName
+);
+
+const buildConfig = require(buildConfigPath);
+
+build(config, buildConfig);
