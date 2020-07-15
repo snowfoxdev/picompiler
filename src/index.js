@@ -3,10 +3,7 @@ const almondtree = require('almondtree');
 const R = require('ramda');
 const fs = require('fs');
 
-const getConfigPath = require('./getConfigPath');
-const build = require('./build');
-
-const picompiler = (text, lang, config) => {
+module.exports = (text, lang, config) => {
   const files = fs.readdirSync(
     config.corePath + '/' + lang
   );
@@ -30,5 +27,3 @@ const picompiler = (text, lang, config) => {
     config.languages[lang].dynamicCore
   );
 };
-
-module.exports = { getConfigPath, build, picompiler };

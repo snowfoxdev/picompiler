@@ -4,7 +4,7 @@ const fs = require('fs');
 const watch = require('node-watch');
 const glob = require('glob');
 
-const { picompiler } = require('./index');
+const picompiler = require('./index');
 
 module.exports = (config, buildConfig) => {
   const writeFiles = (text, filePath) => {

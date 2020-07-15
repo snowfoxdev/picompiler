@@ -1,4 +1,4 @@
-const { picompiler } = require('../index');
+const picompiler = require('../index');
 const config = require('../../example/picompiler.config.js');
 
 test('number', () => {
