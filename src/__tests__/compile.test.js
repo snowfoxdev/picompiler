@@ -1,6 +1,6 @@
 const almondtree = require('almondtree');
 const compile = require('../compile');
-const config = require('../../demo/e1-config');
+const config = require('../../example/picompiler.config.js');
 
 test('add and subtract', () => {
   const text = `(+ (- 1 2) 4)`;
@@ -9,7 +9,9 @@ test('add and subtract', () => {
 
   const output = 'core_add(core_subtract(1, 2), 4)';
 
-  expect(compile(ast, config)).toEqual(output);
+  expect(
+    compile(ast, config.languages.js.dynamicCore)
+  ).toEqual(output);
 });
 
 test('let', () => {
@@ -19,7 +21,9 @@ test('let', () => {
 
   const output = '(()=>{a = 1; b = 2; return a;})()';
 
-  expect(compile(ast, config)).toEqual(output);
+  expect(
+    compile(ast, config.languages.js.dynamicCore)
+  ).toEqual(output);
 });
 
 test('if', () => {
@@ -30,7 +34,9 @@ test('if', () => {
   const output =
     '(true ? core_add(2, 2) : core_subtract(2, 2))';
 
-  expect(compile(ast, config)).toEqual(output);
+  expect(
+    compile(ast, config.languages.js.dynamicCore)
+  ).toEqual(output);
 });
 
 test('$', () => {
@@ -40,7 +46,9 @@ test('$', () => {
 
   const output = '(()=>{core_log(100);core_log(200)})()';
 
-  expect(compile(ast, config)).toEqual(output);
+  expect(
+    compile(ast, config.languages.js.dynamicCore)
+  ).toEqual(output);
 });
 
 test('#', () => {
@@ -50,7 +58,9 @@ test('#', () => {
 
   const output = '(a, b, c) => core_add(a, b, c)';
 
-  expect(compile(ast, config)).toEqual(output);
+  expect(
+    compile(ast, config.languages.js.dynamicCore)
+  ).toEqual(output);
 });
 
 test('[]', () => {
@@ -60,7 +70,9 @@ test('[]', () => {
 
   const output = 'core_log([1, 2, 3])';
 
-  expect(compile(ast, config)).toEqual(output);
+  expect(
+    compile(ast, config.languages.js.dynamicCore)
+  ).toEqual(output);
 });
 
 test('{}', () => {
@@ -70,5 +82,7 @@ test('{}', () => {
 
   const output = 'core_log({a: 1, b: 2})';
 
-  expect(compile(ast, config)).toEqual(output);
+  expect(
+    compile(ast, config.languages.js.dynamicCore)
+  ).toEqual(output);
 });

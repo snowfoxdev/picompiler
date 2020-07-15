@@ -77,7 +77,7 @@ const tokens = [
   { value: 'import', replace: 'require' },
 ];
 
-dynamicCore = (compile) => ({
+const jsDynamicCore = (compile) => ({
   core_let: (elems) => {
     const assignments = elems.length
       ? R.pipe(
@@ -139,16 +139,17 @@ dynamicCore = (compile) => ({
   },
 });
 
-const holder = (
+const jsHolder = (
   text,
   core,
   almondtree,
   compile,
-  config
+  tokens,
+  dynamicCore
 ) => {
-  const ast = almondtree(`(let ${text})`, config);
+  const ast = almondtree(`(let ${text})`, { tokens });
 
-  const main = compile(ast, config);
+  const main = compile(ast, dynamicCore);
 
   return `${core}
 
@@ -161,11 +162,11 @@ if (!['undefined', 'function'].includes(typeof main)) {
 
 module.exports = {
   tokens,
-  dynamicCore,
-  holder,
   fileExtension: 'e1',
-  languages: ['js'],
+  languages: {
+    js: { dynamicCore: jsDynamicCore, holder: jsHolder },
+  },
   corePath: __dirname + '/core',
-  inputFolder: './buildSrc',
-  outputFolder: './build',
+  srcPath: __dirname + '/src',
+  buildPath: __dirname + '/build',
 };

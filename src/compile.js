@@ -1,12 +1,7 @@
 const almondtree = require('almondtree');
 const R = require('ramda');
 
-const {
-  tokens,
-  dynamicCore,
-} = require('../demo/e1-config');
-
-module.exports = (expression, { dynamicCore }) => {
+module.exports = (expression, dynamicCore) => {
   const compile = (expression) => {
     if ('Array' === R.type(expression)) {
       const fnName = R.head(expression);
