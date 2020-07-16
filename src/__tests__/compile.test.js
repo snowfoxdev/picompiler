@@ -9,9 +9,7 @@ test('add and subtract', () => {
 
   const output = 'core_add(core_subtract(1, 2), 4)';
 
-  expect(
-    compile(ast, config.languages.js.dynamicCore)
-  ).toEqual(output);
+  expect(compile(ast, config.languages.js)).toEqual(output);
 });
 
 test('let', () => {
@@ -21,9 +19,7 @@ test('let', () => {
 
   const output = '(()=>{a = 1; b = 2; return a;})()';
 
-  expect(
-    compile(ast, config.languages.js.dynamicCore)
-  ).toEqual(output);
+  expect(compile(ast, config.languages.js)).toEqual(output);
 });
 
 test('if', () => {
@@ -34,9 +30,7 @@ test('if', () => {
   const output =
     '(true ? core_add(2, 2) : core_subtract(2, 2))';
 
-  expect(
-    compile(ast, config.languages.js.dynamicCore)
-  ).toEqual(output);
+  expect(compile(ast, config.languages.js)).toEqual(output);
 });
 
 test('$', () => {
@@ -46,9 +40,7 @@ test('$', () => {
 
   const output = '(()=>{core_log(100);core_log(200)})()';
 
-  expect(
-    compile(ast, config.languages.js.dynamicCore)
-  ).toEqual(output);
+  expect(compile(ast, config.languages.js)).toEqual(output);
 });
 
 test('#', () => {
@@ -58,9 +50,7 @@ test('#', () => {
 
   const output = '(a, b, c) => core_add(a, b, c)';
 
-  expect(
-    compile(ast, config.languages.js.dynamicCore)
-  ).toEqual(output);
+  expect(compile(ast, config.languages.js)).toEqual(output);
 });
 
 test('[]', () => {
@@ -70,9 +60,7 @@ test('[]', () => {
 
   const output = 'core_log([1, 2, 3])';
 
-  expect(
-    compile(ast, config.languages.js.dynamicCore)
-  ).toEqual(output);
+  expect(compile(ast, config.languages.js)).toEqual(output);
 });
 
 test('{}', () => {
@@ -82,7 +70,5 @@ test('{}', () => {
 
   const output = 'core_log({a: 1, b: 2})';
 
-  expect(
-    compile(ast, config.languages.js.dynamicCore)
-  ).toEqual(output);
+  expect(compile(ast, config.languages.js)).toEqual(output);
 });

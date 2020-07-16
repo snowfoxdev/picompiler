@@ -1,13 +1,18 @@
 const almondtree = require('almondtree');
 const R = require('ramda');
 
-module.exports = (expression, dynamicCore) => {
+module.exports = (
+  expression,
+  { dynamicFunctions, dynamicTokens }
+) => {
   const compile = (expression) => {
     if ('Array' === R.type(expression)) {
       const fnName = R.head(expression);
       const elems = R.tail(expression);
 
-      const dynamicFunction = dynamicCore(compile)[fnName];
+      const dynamicFunction = dynamicFunctions(compile)[
+        fnName
+      ];
 
       if (dynamicFunction) {
         return dynamicFunction(elems);
@@ -20,7 +25,7 @@ module.exports = (expression, dynamicCore) => {
         return `${fnName}(${params})`;
       }
     } else {
-      return expression;
+      return dynamicTokens[expression] || expression;
     }
   };
 

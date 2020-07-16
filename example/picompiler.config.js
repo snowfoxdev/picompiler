@@ -77,7 +77,7 @@ const tokens = [
   { value: 'import', replace: 'require' },
 ];
 
-const jsDynamicCore = (compile) => ({
+const dynamicFunctions = (compile) => ({
   core_let: (elems) => {
     const assignments = elems.length
       ? R.pipe(
@@ -139,17 +139,21 @@ const jsDynamicCore = (compile) => ({
   },
 });
 
-const jsHolder = (
+const dynamicTokens = {};
+
+const holder = (
   text,
   core,
   almondtree,
   compile,
-  tokens,
-  dynamicCore
+  config,
+  lang
 ) => {
-  const ast = almondtree(`(let ${text})`, { tokens });
+  const ast = almondtree(`(let ${text})`, {
+    tokens: config.tokens,
+  });
 
-  const main = compile(ast, dynamicCore);
+  const main = compile(ast, config.languages[lang]);
 
   return `${core}
 
@@ -164,7 +168,11 @@ module.exports = {
   tokens,
   fileExtension: 'e1',
   languages: {
-    js: { dynamicCore: jsDynamicCore, holder: jsHolder },
+    js: {
+      dynamicTokens,
+      dynamicFunctions,
+      holder,
+    },
   },
   configName: 'e1-lang.config.js',
   corePath: __dirname + '/core',

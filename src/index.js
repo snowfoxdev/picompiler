@@ -23,7 +23,7 @@ module.exports = (text, lang, config) => {
     core,
     almondtree,
     compile,
-    config.tokens,
-    config.languages[lang].dynamicCore
+    config,
+    lang
   );
 };
