@@ -139,7 +139,7 @@ const dynamicFunctions = (compile) => ({
   },
 });
 
-const dynamicTokens = {};
+const dynamicTokens = [];
 
 const holder = (
   text,

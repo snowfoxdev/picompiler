@@ -25,7 +25,9 @@ module.exports = (
         return `${fnName}(${params})`;
       }
     } else {
-      return dynamicTokens[expression] || expression;
+      return R.cond([...dynamicTokens, [R.T, R.identity]])(
+        expression
+      );
     }
   };
 
