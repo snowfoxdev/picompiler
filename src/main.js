@@ -1,7 +1,8 @@
 const getConfigPath = require('./getConfigPath');
 const build = require('./build');
+const index = require('.index/');
 
-module.exports = (config) => {
+exports.build = (config) => {
   const buildConfigPath = getConfigPath(
     process.argv[2],
     config.configName
@@ -11,3 +12,5 @@ module.exports = (config) => {
 
   build(config, buildConfig);
 };
+
+exports.index = index;
