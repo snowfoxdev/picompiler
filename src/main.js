@@ -1,6 +1,6 @@
 const getConfigPath = require('./getConfigPath');
 const build = require('./build');
-const index = require('./index/');
+const index = require('./index');
 
 exports.build = (config) => {
   const buildConfigPath = getConfigPath(
